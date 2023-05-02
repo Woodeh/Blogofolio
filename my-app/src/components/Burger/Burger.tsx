@@ -2,8 +2,12 @@ import { useState } from "react";
 import "./Burger.scss";
 import { UserInfo } from "../UserInfo/UserInfo";
 
-export const HamburgerMenu = () => {
-  const [isOpen, setIsOpen] = useState(false);
+interface Props {
+  username: string;
+}
+
+export const HamburgerMenu: React.FC<Props> = () => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
