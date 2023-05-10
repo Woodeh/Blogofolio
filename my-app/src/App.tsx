@@ -1,4 +1,4 @@
-import { HamburgerMenu } from "./components/Burger/Burger"
+import { HamburgerMenu } from "./components/BurgerMenu/BurgerMenu"
 import { UserInfo } from "./components/UserInfo/UserInfo" 
 
 export const App = () => {
