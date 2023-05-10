@@ -1,30 +1,28 @@
-import { useState } from "react";
-import "./Burger.scss";
-import { UserInfo } from "../UserInfo/UserInfo";
+import { FC, useState } from 'react';
+import burgerMenu from '../../assets/icons/burgerMenu.svg';
+import cancel from '../../assets/icons/cancel.svg';
+import './BurgerMenu.scss';
 
-interface Props {
-  username: string;
+
+interface IBurgerMenu {
 }
 
-export const HamburgerMenu: React.FC<Props> = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+export const BurgerMenu: FC<IBurgerMenu> = () => {
+    const [isOpen, setIsOpen] = useState(false); // let isOpen = false;
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
+    const handleClick = () => {
+        setIsOpen((prev) => !prev);
+    }
 
-  return (
-    <div className="burger-menu">
-      <button onClick={toggleMenu}>
-        <div className={`burger-menu__icon ${isOpen ? "open" : ""}`}>
-          <span></span>
-          <span></span>
-          <span></span>
-        </div>
-      </button>
-      <ul className={`burger-menu__items ${isOpen ? "open" : ""}`}>
-        <UserInfo username={"Arkadiy Cherkassov"} />
-      </ul>
-    </div>
-  );
+    return (
+        <>
+            <button className='burgerMenu' onClick={handleClick}>
+                {isOpen ? (
+                    <img src={cancel} alt="cancel" />
+                ) : (
+                    <img src={burgerMenu} alt="burgerMenu" />
+                )}
+            </button>
+        </>
+    )
 };
