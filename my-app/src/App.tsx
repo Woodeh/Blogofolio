@@ -1,12 +1,21 @@
-import { HamburgerMenu } from "./components/Burger/Burger"
-import { UserInfo } from "./components/UserInfo/UserInfo" 
+import { BurgerMenu } from "./components/BurgerMenu/BurgerMenu"
+import { Typography } from "./components/Typography/Typography"
+
+
 
 export const App = () => {
 
   return (
     <div>
-      <HamburgerMenu/>
+      <Typography content="Test" type="H1"/>
+      <Typography content="Test" type="H2"/>
+      <Typography content="Test" type="H3"/>
+      <Typography content="Test" type="subline"/>
+      <Typography content="Test" type="textPrimary"/>
+      <Typography content="Test" type="textSecondary"/>
+      <br />
+      <BurgerMenu/>
     </div>
-  )
+  );
 }
 
