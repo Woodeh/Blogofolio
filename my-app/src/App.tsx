@@ -1,4 +1,5 @@
 import { BurgerMenu } from "./components/BurgerMenu/BurgerMenu"
+import { Tabs } from "./components/Tabs/Tabs";
 import { Typography } from "./components/Typography/Typography"
 
 
@@ -15,6 +16,9 @@ export const App = () => {
       <Typography content="Test" type="textSecondary"/>
       <br />
       <BurgerMenu/>
+      <br />
+      <br />
+      <Tabs/>
     </div>
   );
 }
