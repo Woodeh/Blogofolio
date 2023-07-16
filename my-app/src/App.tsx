@@ -1,25 +1,29 @@
-import { BurgerMenu } from "./components/BurgerMenu/BurgerMenu"
-import { Tabs } from "./components/Tabs/Tabs";
-import { Typography } from "./components/Typography/Typography"
-
-
+import { useEffect } from "react";
+import { PageTemplate } from "./components/PageTemplate/PageTemplate";
+import { Router } from "./routes/Router";
+import { verifyAccessToken } from "./api/auth/verifyAccessToken";
+import { useAppDispatch } from "./store/hooks";
+import { setLoggedAction } from "./store/auth/actions";
 
 export const App = () => {
+  const dispatch = useAppDispatch();
 
+  useEffect(() => {
+    const token = localStorage.getItem('access_token');
+
+    if (token) {
+      verifyAccessToken({ token }).then(() => {
+        dispatch(setLoggedAction());
+      });
+    }
+
+  }, [dispatch])
+  
   return (
-    <div>
-      <Typography content="Test" type="H1"/>
-      <Typography content="Test" type="H2"/>
-      <Typography content="Test" type="H3"/>
-      <Typography content="Test" type="subline"/>
-      <Typography content="Test" type="textPrimary"/>
-      <Typography content="Test" type="textSecondary"/>
-      <br />
-      <BurgerMenu/>
-      <br />
-      <br />
-      <Tabs/>
-    </div>
+    <>
+      <PageTemplate>
+        <Router />
+      </PageTemplate>
+    </>
   );
 }
-

@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, RefObject, KeyboardEvent } from 'react';
 import './Input.scss';
 
 interface IInput {
@@ -7,7 +7,10 @@ interface IInput {
     title: string;
     placeholder?: string;
     isDisabled?: boolean;
-    errorMessage?: string;
+    errorMessage?: string | string[];
+    inputRef?: RefObject<HTMLInputElement>;
+    handleKeyUp?: (e: KeyboardEvent<HTMLInputElement>) => void;
+    type?: 'text' | 'password' | 'number';
 }
 
 export const Input: FC<IInput> = ({
@@ -16,21 +19,31 @@ export const Input: FC<IInput> = ({
     placeholder,
     title,
     isDisabled = false,
-    errorMessage
+    errorMessage,
+    inputRef,
+    handleKeyUp,
+    type = 'text',
 }) => {
+
+    const generatErrorMessage = (message: string | string[]) => typeof message === 'string' ? message : message.join(' ');
+
     return (
         <div className='input-wrapper'>
-            <label className='label' htmlFor="input-text">{title}</label>
+            <label className='label' htmlFor={`input-${title}`}>{title}</label>
             <input
                 className={`input ${errorMessage && 'error'}`}
                 placeholder={placeholder}
                 disabled={isDisabled}
-                type="text"
-                id='input-text'
+                type={type}
+                id={`input-${title}`}
                 value={value}
                 onChange={(e) => handleChange(e.target.value)}
+                ref={inputRef}
+                onKeyUp={handleKeyUp}
+                autoComplete='off'
+                data-testid='input'
             />
-            {errorMessage && <div className='errorMesage'>{errorMessage}</div>}
+            {errorMessage && <div className='errorMesage'>{generatErrorMessage(errorMessage)}</div>}
         </div>
     )
 };
